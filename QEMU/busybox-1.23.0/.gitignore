@@ -1,0 +1,6 @@
+tests/
+*~
+*.o
+*.o.cmd
+util-linux/Kbuild.tmp
+

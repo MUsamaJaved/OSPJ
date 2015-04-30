@@ -1,0 +1,27 @@
+Protocol 05.11.2014
+
+__Attendance__
+Armand
+Lukas
+Marat
+Tamil
+Stephan B.
+Andrij
+Rakesh varadu
+
+1. New student that want to participate (Rakesh varadu)
+
+2. New meeting time slot agreement (via doodle)
+	tue 2:00 - 4:00 (The seminar slot will be used for meeting as long as there're no presentations yet)
+	    4:00 - 6:00 (Armand and Marat will be missing)
+	Thu 4:00 - 6:00 (Stephan F. will be missing)
+
+3. Mohammed introduced the first backlog
+	Implementing the most simple approach of the VM Scheduler.
+	A Vm not cosumming his whole timeslot is not allowed to get the cpu back in the same super period, but will be put
+	into a waiting queue instead.
+
+4. Defining subtaks
+	Updating the Kernel. Setting up the git/develop environment/infrastructure (Stephan B., Andrij)
+	Implementing the scheduler class (Armand, Mirko, Tamil)
+	CPU states (Lukas, Marat)

@@ -1,0 +1,64 @@
+1. Andrij 		(ill)
+2. Mirko		(left KBS-Project forever)
+3. Armand		(NA)
+4. Marat		(NA)
+5. Steafan Bauroth 	(available) 
+6. Lukas Braband	(available)
+7. Tamil		(available)
+8. Stephan F		(available)
+
+##########################################################
+
+Stephan F.: Problem: We have not defined fine-grained subtasks: ToDo for sched-group: Devide "Implementing the scheduler Class"-Task in redmine
+S.B.: set up user-accounts for Deneb-Server
+	- prostponed automatic booting
+	- updated kernel to 3.xx.60
+	- future:
+		- little stuff to do on server
+		- familiarize with kernel-update progress (=> deploy kernel's we program)
+		- get to know how to handle Modules (kill modules used by somehone else)
+		- Andrij and Stefan will post to Redmine when there is a solution for this
+		- 
+	Stephan: "Team-Decision": Stefan B will monitor Kernel-Updates (as he does anyway) 
+		and will update Kernel if there are useful changes for us
+Lukas: task with two baseline measurements was finished (see redmine)
+	Problem with cpuid-command (getting 3 CPU-Registers into c-Variable)
+Stephan: On every monday evening/latest tuesday morning every teammember shall update his team (features on redmine)
+
+Procedure in case of a problem:
+	- When the situation appears that one does not know how to continue with his task, the one must post his problem to redmine (feature-list) (instead of trying for hours and days without progress).
+	If this problem is not fixed until a certain date/deadline (e.g. until the next meeting or the one after), we will have to find another solution (e.g. ask other people not related to the project) or maybe Mohammad knows help.
+
+##########################################################
+
+
+General explanation of mode of working
+======================================
+
+First, the Product Owner defines product backlog (one for every sprint).
+Then every point from the backlog is copied to the sprint (now as features)
+maxim: "dont think in problems, think in solutions"
+
+find team-person (aside to Stephan) 
+"junior scrum master" person to make shure that the project progresses (while scrummaster is not present on thursdays)
+
+For the future
+==============
+First 10min of project meeting taskboard-overview (in redmine) must be shown
+In general every task has to be entered to redmine. The task shall be small(not take too much time).
+When it is done it must be marked as solved/100%done. Working after this matter we can will us always give a better feedback on our work and progress.
+- It will give you a good feeling to mark a task as solved/100%done and will keep you motivated for the next task.
+- The workload of everyone in the team will adapt, so that in the end everyone makes the same input to the project.
+	- e.g. if someone marks that he has done 3tasks this week this will meet other members who have not yet put that much effort into the project.
+	- and problems will be solved together on redmine (or if not possible) afterwords with the help of external people
+http://www.redminebacklogs.net/en/usage-team-member.html
+
+#########################################################
+
+Problem-discussion: Why was the sprint not finished on thursday?
+	Question to think for everyone
+
+#########################################################
+One IMPORTANT Detection!! :
+From  now on we have 2months left for our project!!
+

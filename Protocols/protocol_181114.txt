@@ -1,0 +1,9 @@
+Meeting on 11th Nov 2014, Tuesday 14:00 to 16:00 / -18:00
+Attendees
+	1. Lukas Braband
+	2. Stephan Bauroth
+	3. Tamilselvan Shanmugam
+	4. Marat Timergaliev
+	5. Andrij
+
+	not a lot - some basic exchange of what the c-States-group did and what the Build-Environment group did.

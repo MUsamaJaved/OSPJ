@@ -1,0 +1,24 @@
+Meeting on 21st Oct 2014, Tuesday 14:00 to 16:00
+
+Attendees
+	1. Lukas Braband
+	2. Stephan Bauroth
+	3. Armand Zangue
+	4. Stephan Fell
+	5. Tamilselvan Shanmugam
+	6. Mirko Liebender
+
+Discussions
+	We had an agenda for todays meeting. That includes Team skills, Assigning Role, Project management model, Milestones.
+
+	SCRUM Project management model, Agile model and others were discussed. Its concluded that, to keep the management part as simple as possible and focusing on technical part.
+
+	Common Gitlab repository is created for the development purpose.
+URL: https://gitlab.tubit.tu-berlin.de/mirko/operating-system-project
+
+Overview of this project, what we are going to implement, how to schedule the VM's,  required skill set and role for everybody were explored with the input we had.
+
+Future work
+	Gitlab knowledge sharing session to team.
+	Gathering requirement from customer.
+	Assigning milestones and Roles.

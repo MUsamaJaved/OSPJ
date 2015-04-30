@@ -1,0 +1,176 @@
+\documentclass{beamer}
+% \documentclass[compress]{beamer}
+
+\usetheme{Berlin}
+\usecolortheme{beaver}
+
+\newcommand{\itemcolor}{darkred!60!gray}
+\setbeamercovered{transparent}
+\beamertemplatenavigationsymbolsempty
+% \setbeamertemplate{section in toc}[circle]
+% \setbeamertemplate{subsection in toc}[circle]
+% \setbeamertemplate{itemize items}[circle]
+% \setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{itemize item}{fg=\itemcolor}
+\setbeamercolor{item projected}{bg=\itemcolor}
+
+\AtBeginSection{\frame{\sectionpage}}
+% \AtBeginSubsection{\frame{\subsectionpage}}
+\AtBeginSubsection[]
+{
+    \begin{frame}{Outline}
+        \tableofcontents[currentsection,currentsubsection]
+    \end{frame}
+}
+
+% \useoutertheme{infolines}
+% \setbeamertemplate{headline}{} % removes the headline that infolines inserts
+\newcommand*\oldmacro{}%
+\let\oldmacro\insertshorttitle%
+\renewcommand*\insertshorttitle{%
+   \oldmacro\hfill%
+   \insertframenumber\,/\,\inserttotalframenumber}
+
+
+\usepackage[english]{babel}
+\usepackage{caption}
+\usepackage{pdfpcnotes}
+\usepackage{fontspec}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{lstlinebgrd}
+\usepackage{pgf, pgffor}
+\usepackage{xkeyval}
+\usepackage{todonotes}
+\presetkeys{todonotes}{inline}{}
+\setsansfont[Ligatures=TeX]{Source Sans Pro}
+% \setsansfont{FreeSans}
+\setmonofont[Scale=MatchLowercase]{Source Code Pro}
+% \setmonofont{DejaVu Sans Mono}
+\renewcommand\mathfamilydefault{\rmdefault}
+
+\title{Design and implementation of an \\ Energy-Aware VCPU Scheduler for Linux Kernel}
+\date{31. March, 2015} 
+\institute{
+  Fakult\"at f\"ur Elektrotechnik und Informatik\\
+  TU Berlin}
+
+\newcommand{\dummyslide}[1][Dummy slide]{
+\frame{\frametitle{#1}
+  \todo{Insert a slide here about #1}
+}}
+
+\newcommand{\simplesection}[1]{\section{#1}\stepcounter{subsection}}
+\newcommand{\fixme}[1]{\textcolor{green}{\textbf{#1}}} 
+
+\lstset{ %
+% Basic styles
+  basicstyle=\small\ttfamily,
+  frame=l,                  
+  % title=\lstname,                  
+  aboveskip=\medskipamount,
+  belowskip=\medskipamount,
+% Line numbering
+  stepnumber=1,                    
+  numbers=left,                    
+  numbersep=5pt,                   
+% Tabs and spaces
+  tabsize=4,
+  showtabs=false,                  
+  showspaces=false,               
+  showstringspaces=false,          
+  breakatwhitespace=false,        
+  breaklines=false,                 
+  % escapeinside={\%*}{*)},        
+  extendedchars=true,              
+% Colors                      
+  numberstyle=\color{gray},
+  rulecolor=\color{gray},        
+  keywordstyle=\color{blue},       
+  stringstyle=\color{brown},   
+  commentstyle=\color{green!50!black},   
+  backgroundcolor=\color{white}, 
+}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% \btIfInRange{number}{range list}{TRUE}{FALSE}
+%
+% Test in int number <number> is element of a (comma separated) list of ranges
+% (such as: {1,3-5,7,10-12,14}) and processes <TRUE> or <FALSE> respectively
+
+\newcount\bt@rangea
+\newcount\bt@rangeb
+
+\newcommand\btIfInRange[2]{%
+    \global\let\bt@inrange\@secondoftwo%
+    \edef\bt@rangelist{#2}%
+    \foreach \range in \bt@rangelist {%
+        \afterassignment\bt@getrangeb%
+        \bt@rangea=0\range\relax%
+        \pgfmathtruncatemacro\result{ ( #1 >= \bt@rangea) && (#1 <= \bt@rangeb) }%
+        \ifnum\result=1\relax%
+            \breakforeach%
+            \global\let\bt@inrange\@firstoftwo%
+        \fi%
+    }%
+    \bt@inrange%
+}
+\newcommand\bt@getrangeb{%
+    \@ifnextchar\relax%
+        {\bt@rangeb=\bt@rangea}%
+        {\@getrangeb}%
+}
+\def\@getrangeb-#1\relax{%
+    \ifx\relax#1\relax%
+        \bt@rangeb=100000%   \maxdimen is too large for pgfmath
+    \else%
+        \bt@rangeb=#1\relax%
+    \fi%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% \btLstHL<overlay spec>{range list}
+%
+% TODO BUG: \btLstHL commands can not yet be accumulated if more than one overlay spec match.
+% 
+\newcommand<>{\btLstHL}[1]{%
+  \only#2{\btIfInRange{\value{lstnumber}}{#1}{\color{orange!30}\def\lst@linebgrdcmd{\color@block}}{\def\lst@linebgrdcmd####1####2####3{}}}%
+}%
+\makeatother
+
+
+\begin{document}
+
+\frame{\titlepage} 
+
+\frame{\frametitle{Table of contents}\tableofcontents} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Introduction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{01_introduction}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Scheduler subsystem
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{02_sched}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Power-saving subsystem
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{03_power}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Live demo
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\simplesection{Live demo}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Devops
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{04_devops}
+
+\end{document}

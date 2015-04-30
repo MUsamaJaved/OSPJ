@@ -1,0 +1,4 @@
+#!/bin/bash
+
+make ARCH=x86_64 -j8 2>&1 | grep -B 3 -A 5 -i ospj
+exit

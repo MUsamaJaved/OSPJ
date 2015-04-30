@@ -1,0 +1,5 @@
+
+keine .ko-datei da.
+=> wieso läuft das modul dann noch?
+=> muss die .ko datei auch wirklich zu dem unter lsmod aufgelisteten Modul gehören (oder muss sie einfach nur genauso heißen)?
+

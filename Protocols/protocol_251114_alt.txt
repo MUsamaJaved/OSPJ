@@ -1,0 +1,57 @@
+1. Andrij 		(ill)
+2. Mirko		(left KBS-Project)
+3. Armand		(NA)
+4. Marat		(NA)
+5. Steafan Bauroth 	(available) 
+6. Lukas Braband	(available)
+7. Tamil		(available)
+8. Stephan F		(available)
+
+##########################################################
+
+Stefan: Problem: We have not defined fine-grained subtasks: ToDo for sched-group: Devide "Implementing the scheduler Class"-Task in redmine
+Tamil: 
+S.B.: set up user-accounts for Deneb-Server
+	- prostponed automatic booting
+	- updated kernel to 3.xx.60
+	- future:
+		- little stuff to do on server
+		- familiarize with kernel-update progress (=> deploy kernel's we program)
+		- get to know how to handle Modules (kill modules used by somehone else)
+		- Andrij and Stefan will post to Redmine when there is a solution for this
+		- 
+	Stephan: "Team-Decision": Stefan B will monitor Kernel-Updates (as he does anyway) 
+		and will update Kernel if there are useful changes for us
+Lukas: task with two baseline measurements was finished (see redmine)
+	Problem with cpuid-command (getting 3 CPU-Registers into c-Variable)
+Stephan: On monday evening/latest tuesday morning every teammember shall update his team
+
+Procedure in case of a problem:
+	- When the situation appears that one does not know how to continue with a problem, the one must post his problem to redmine (feature-list)
+	if it is not fixed until a certain date/deadline, we will have to find another solution (e.g. ask other people not related to the project)
+
+##########################################################
+
+
+General explanation in mode of working
+======================================
+
+First the Product Owner defines product backlog (one for every sprint).
+Then every point from the backlog is copied to the sprint (as features)
+
+dont think in problems, think in solutions
+
+
+find team-person (aside to Stephan) 
+"junior scrum master" person to make shure that the project progresses
+
+
+Problem-discussion: Why was the sprint not finished on thursday?
+	Question to think for everyone
+
+#########################################################
+One IMPORTANT Detection!! :
+From  now on we have 2months left for our project!!
+
+########################################################
+First 10min of project meeting taskboard-overview (in redmine) must be shown

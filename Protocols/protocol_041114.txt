@@ -1,0 +1,28 @@
+1. Information gathering Sumup
+	a - Scheduler Subsystem
+	Armand is investigation how to attach qemu pids to a certain scheduler
+	also the assigned cpu core is to be configured (cgroups do that),
+	controllable via systemcalls
+	
+	three different scheduler classes in kernel, containing different policies
+	Mohammad suggests a short presentation about these, we think everyone can read that up
+	
+	Still research to be done, generic overview is present
+	missing till now:
+		required hook to a scheduler class (prerequirities by the kernel)
+		interfaces of data structures of pids in the kernel
+	
+	b - VMs (How to assign a KVM pid (qemu) to a scheduler)
+	Stephan F. says it's easy and solved
+	(as long as we implement a corresponding scheduler)
+	
+	c - CPU power Interface
+	frequency control is easily done via cpufreq under /sys/devices/...
+	what about p- and c-state control?
+	what about timers in p-states and idle?
+	status of peripherals in different power states?
+
+length of sprints:
+	3 weeks.
+	
+meeting tomorrow: 14-16. Decision for next week then.	

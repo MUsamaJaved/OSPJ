@@ -1,0 +1,28 @@
+Meeting on 29th Oct 2014, Wednesday 14:00 to 16:00
+Attendees
+	1. Lukas Braband
+	2. Stephan Bauroth
+	3. Armand Zangue
+	4. Stephan Fell
+	5. Tamilselvan Shanmugam
+	6. Mirko Liebender
+	7. Marat Timergaliev
+
+	Introductory presentation about GitLab by Stephan Bauroth. The short sesson gave a quick insight of GitLab, how to incorporate in the project and some nitty gritty  commands.
+	SCRUM management framework presentation by Stephan Fell. The detailed talk explained all the aspects, roles, sprints, pros and cons of the framework. Its decided that the team is adapting SCRUM framework with some changes like daily SCRUM call to once or couple of times a week, Roles are made flexible to compensate man power.
+
+Roles:
+	 Stephan Fell is opted as SCRUM Manager. He will be working full time to talk to clients and Product Owner, setting deadline for sprints.
+	Armand Zangue has overall picture of the project. So, he will be acting as Product Owner and a Team member as well.
+	All the others are associated with any of the following modules.
+
+Module split up:
+	Scheduler Subsystems
+	CPU Power Interface
+	Measurement automation
+	Benchmarking
+	VMM
+
+Future work
+	Administrative works on Tuesday meeting.
+	In depth technical exploration on Wednesday meeting.

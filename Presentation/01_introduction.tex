@@ -1,0 +1,58 @@
+\simplesection{Introduction}
+
+\frame{
+	\frametitle{Project scope}
+
+	\begin{itemize}
+		\item New scheduler for the Linux kernel
+		\item Main purpose of the scheduler is to save power on the server
+		\item Mainly used to schedule virtual machines
+		\item Specifically, QEMU VMs in our project
+	\end{itemize}
+}
+
+\frame{
+	\frametitle{Project idea}
+
+	\begin{itemize}
+		\item CPU is allocated to virtual machine CPUs (VCPUs) in superperiods
+		\item Each VCPU has a certain time to run 
+		\item Proportionally to its predefined share of the CPU 
+		\item If there is any time left in a superperiod, save power
+	\end{itemize}
+}
+
+\frame{
+	\frametitle{How the work is divided}
+
+	Scheduler team:
+
+	\begin{itemize}
+		\item Armand Zangue
+		\item Tamilselvan Shanmugam
+		\item Andrii Berezovskyi
+	\end{itemize}
+
+	Power team:
+
+	\begin{itemize}
+		\item Lukas Braband
+		\item Marat Timergaliev
+	\end{itemize}
+
+	Devops team:
+
+	\begin{itemize}
+		\item Stephan Bauroth
+		\item Andrii Berezovskyi
+	\end{itemize}
+}
+
+\begin{frame}{Agile \& Scrum}
+	\begin{itemize}
+		\item It's a progressive approach
+		\item We knew about it but never practiced it before
+		\item It is a bad tool in the wrong hands {\color{white} of Scrum {\scshape master of disaster}}
+		\item In general, it slowed us down until December
+	\end{itemize}
+\end{frame}

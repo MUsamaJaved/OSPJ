@@ -1,0 +1,17 @@
+#!/bin/sh
+
+mkdir /proc
+/bin/mount -t proc none /proc
+mkdir /sys
+/bin/mount -t sysfs sysfs /sys
+mdev -s
+mkdir /etc
+
+sleep 1
+
+echo ' '
+echo 'OSPJ rockz, redmine sucks, SCRUMM too'
+echo 'But u guyz r c00l so I got this going for me which is kind of n1 :)'
+echo ' '
+
+/bin/sh

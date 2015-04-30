@@ -1,0 +1,220 @@
+\simplesection{Power-saving subsystem}
+\lstset{
+	language=C,
+	basicstyle=\tiny,
+	numbers=none,
+	frame=none,
+	tabsize=4,
+	showtabs=false
+}
+	
+
+\subsection{Power Management}
+    
+\frame{
+    \frametitle{Power management approaches}
+    \begin{itemize}
+        \item Sleeping states (C-States)
+        \item Core disabling.
+        \item Dynamic frequency scaling (P-states)
+    \end{itemize}
+}
+
+\frame{
+    \frametitle{Speeping states \& C-States}
+    \begin{itemize}
+        \item What is a C-state?
+        \item Requirements
+        \item How to enable?  
+        \item Fail and hunt for an approach
+    \end{itemize}
+}
+
+
+
+\frame {
+    \frametitle{Sleeping states. What is a C-state?}
+    \begin{itemize}
+        \item Definition
+        \item The basic power states: C0, C1, C2, C3
+        \item Architecture specific difference
+    \end{itemize}
+}
+
+\frame {
+    \frametitle{Sleeping states. Requirements}
+    \begin{itemize}
+        \item BIOS ACPI component
+        \item ACPI module
+        \item CPU idle driver
+    \end{itemize}
+}
+
+\begin{frame}[fragile]
+{ACPI module installation configuration}
+\begin{lstlisting}[language=C,gobble=0]
+CONFIG_PM=y
+CONFIG_ACPI=y
+CONFIG_ACPI_AC=y
+CONFIG_ACPI_BATTERY=y
+CONFIG_ACPI_BUTTON=y
+CONFIG_ACPI_FAN=y
+CONFIG_ACPI_PROCESSOR=y
+CONFIG_ACPI_THERMAL=y
+CONFIG_ACPI_BLACKLIRG_YEAR=0
+CONFIG_ACPI_EC=y
+CONFIG_ACPI_POWER=y
+CONFIG_ACPI_SYSTEM=y
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]
+	{Sleeping states. How to enable C1?}
+	\begin{itemize}
+		\item	Meet the mentioned requirements
+		\item	Read specific msr register - {\color{red}MSRC001\_0073}            
+		\item[]	\begin{lstlisting}
+/*
+ * Reading the msr register.
+ * @param msr_id - MSR Register to read
+ * @return msr_value - The status of reading the register
+ */
+static long rdmsr_v(long msr_id){		
+    long long msr_value;
+    asm volatile ( "rdmsr" : "=A" (msr_value) : "c" (msr_id) );
+    return msr_value;		
+}
+\end{lstlisting}
+		\item	Or Execute {\color{red}HLT} instruction
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Fail and hunt for an approach}
+	\begin{itemize}
+		\item No ACPI configuration in BIOS even with the latest update
+		\item Powertop didn't detect available C-states
+		\item Specific CPU idle driver absent for our CPU
+		\item Approach fail, and hunting green piece energy mode
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Core disabling}
+	\begin{enumerate}
+		\item Advantages of the approach. 
+		\item[] \lstinline$sudo sh -c 'echo 0 > /sys/devices/system/cpu/cpu1/online'$
+		\item Benchmark
+	\end{enumerate}
+\end{frame}
+
+\frame{
+    \frametitle{Benchmark Core disabling vs DFS}
+    \begin{table}[h]
+        \begin{tabular}{ | l | c | c | c | c|}
+    \hline
+        Experiments & Cores & Freq      & Energy    & Response          \\ 
+        \hline
+        1 Baseline  & 4     & 3 GHz     & 77194 Ws  & 0                 \\ 
+        \hline
+        2           & 3     & 3 GHz     & 71693 Ws  & 15-45ms           \\
+        \hline
+        3           & 4     & 3 cores on& 73150 Ws  & 5μs               \\
+        &       & 3 GHz and &           &                   \\
+        &       & 1 core on &           &                   \\
+        &       & 800 MHz   &           &                   \\
+        \hline
+        4           & 4     & 800 MHz   & 37966 Ws  & 5μs               \\
+        \hline
+        \end{tabular}
+    \caption*{All experiments were performed with a cpu-load of 100\%}
+    \end{table}
+}
+
+
+\begin{frame}{P-states}
+    \begin{enumerate}
+        \item With P-states, frequencies can be changed
+        \item ACPI-cpufreq allows P-States of AMD Phenom(tm) II X4 940 Processor:
+    \end{enumerate}
+        \begin{table}[h]
+        \begin{tabular}{ | l | c | c |}
+    \hline
+    P-state & Frequency \\
+    \hline
+    P0 & 3.0Ghz \\
+    P1 & 2.3Ghz \\
+    P2 & 1.8Ghz \\
+    P3 & 800Mhz \\
+    \hline
+     \end{tabular}
+    \end{table}
+\end{frame}
+
+\begin{frame}[fragile]{Ways to switch P-states}
+	\begin{itemize}
+		\item	Via shell:\\
+			\lstinline$cpupower -c 0 frequency-set -f 800000$
+		\item	Via shell with sysfs:
+			\begin{lstlisting}
+sudo sh -c 'echo userspace >
+    /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor'
+sudo sh -c 'echo 800000 >
+    /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed'
+\end{lstlisting}
+		\item	Via c-function:
+			\begin{enumerate} 
+				\item from \textbf{user}-space with sysfs:\\
+					\lstinline$sysfs_set_frequency(unsigned int cpu, unsigned long target_frequency);$
+				\item from \textbf{kernel}-space
+			\end{enumerate}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{P-state-switching from kernel-space}
+	\begin{itemize}
+		\item interface not clearly defined (yet?) %Comment: under development, mention big load of messages in linux-pm developer-mailing-list
+		\item cpufreq\_policy (struct defined in include/linux/cpufreq.h)
+		\item Tried to get current policy, manipulate and set it again\\
+			$\rightarrow$ But failed
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Code example P-states}
+	\begin{lstlisting}
+struct cpufreq_policy *policy, *policy_max, *policy_min;
+struct cpufreq_policy *cpu_policy = NULL;
+int tmpGetPolicyResult;
+int error;
+policy = (struct cpufreq_policy*) kmalloc(sizeof (struct cpufreq_policy), GFP_ATOMIC);
+policy_max = (struct cpufreq_policy*) kmalloc(sizeof (struct cpufreq_policy), GFP_ATOMIC);
+policy_min = (struct cpufreq_policy*) kmalloc(sizeof (struct cpufreq_policy), GFP_ATOMIC);
+if (!(policy && policy_max && policy_min))
+    /* error handling */
+error = cpufreq_get_policy(policy, cpuNo); 
+if (!error && policy)
+    /* error handling */
+memcpy((void*)policy_min, (void*)policy, sizeof(struct cpufreq_policy));
+memcpy((void*)policy_max, (void*)policy, sizeof(struct cpufreq_policy));
+policy_max->min = 3000000;
+policy_max->max = 3000000;
+policy_min->min =  800000;
+policy_min->max =  800000;
+cpufreq_cpu_put(policy_max);
+kfree(policy);
+policy = NULL;
+kfree(policy_min);
+policy_min = NULL;
+kfree(policy_max);
+policy_max = NULL;
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Plan for P-state-switching from kernel-space}
+    \begin{itemize}
+		\item a governor has a function-pointer store\_setspeed:
+		\item \lstinline$int (*store_setspeed) (struct cpufreq policy *policy, unsigned int freq);$
+		\item hand over our policy and frequency
+		\item fields for min-, max- and cur frequency
+    \end{itemize}
+\end{frame}

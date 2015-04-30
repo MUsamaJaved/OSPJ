@@ -1,0 +1,4 @@
+*.bin
+*.o
+ospj-setsched
+core
